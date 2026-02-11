@@ -1,0 +1,514 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Love Story ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(-45deg,#ff758c,#ff7eb3,#ff4d6d,#ff8fab);
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h1 {
+            margin-top: 40px;
+            font-size: 3rem;
+        }
+
+        .section {
+            margin: 70px 20px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+            .section.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+            .gallery img {
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+                border-radius: 20px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                transition: transform 0.4s, box-shadow 0.4s;
+                cursor: pointer;
+            }
+
+                .gallery img:hover {
+                    transform: scale(1.07);
+                    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+                }
+
+        .engagement img {
+            border: 3px solid #fff;
+        }
+
+        .family img {
+            border: 3px solid #ffd6e0;
+        }
+
+        .marriage img {
+            border: 3px solid gold;
+            box-shadow: 0 0 25px rgba(255,215,0,0.8);
+        }
+
+        .secret img {
+            border: 3px dashed white;
+        }
+
+        .birthday img {
+            border: 3px solid #ffe066;
+        }
+
+        .names {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hidden-message {
+            display: none;
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 40px auto;
+            min-height: 80px;
+            border-right: 2px solid white;
+        }
+
+        .love-button {
+            margin-top: 50px;
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: none;
+            background: white;
+            color: #ff4d6d;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -10px;
+            animation: floatUp linear forwards;
+            color: rgba(255,255,255,0.8);
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+
+        footer {
+            margin: 60px 0;
+        }
+
+        /* Password screen */
+        #password-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg,#ff4d6d,#ff8fab);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+            #password-screen input {
+                padding: 10px 20px;
+                border-radius: 25px;
+                border: none;
+                margin-top: 10px;
+            }
+
+            #password-screen button {
+                margin-top: 10px;
+                padding: 8px 20px;
+                border-radius: 25px;
+                border: none;
+                background: white;
+                color: #ff4d6d;
+                font-weight: bold;
+            }
+
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #fff8dc, gold, #ffcc00);
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 10px gold, 0 0 20px #ffcc00;
+            animation: glitter 3s infinite ease-in-out;
+        }
+
+        @keyframes glitter {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.4);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+        /* Image Lightbox */
+        #imageLightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            animation: fadeIn 0.4s ease;
+        }
+
+            #imageLightbox img {
+                max-width: 90%;
+                max-height: 85%;
+                border-radius: 20px;
+                box-shadow: 0 0 40px rgba(255,215,0,0.6);
+                animation: zoomIn 0.4s ease;
+            }
+
+            #imageLightbox span {
+                position: absolute;
+                top: 30px;
+                right: 40px;
+                font-size: 2rem;
+                cursor: pointer;
+                color: white;
+            }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .after-wedding img {
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255,215,0,0.6);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div id="password-screen">
+        <h2>Happy Valentine’s Day My Love ❤️</h2>
+
+        <p style="max-width:400px;text-align:center;margin:10px 0 20px;">
+            Before you unlock this little world of ours,
+            I just want you to know —
+            you are my today and all of my tomorrows. 💌
+        </p>
+
+        <h3>Enter Our Special Date 💖</h3>
+
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="checkPassword()">Unlock</button>
+        <div id="error"></div>
+    </div>
+
+    <audio id="bg-music" src="romantic-song.mp3" loop></audio>
+
+    <h1>Our Beautiful Love Story ❤️</h1>
+    <div class="names">Jamuna ❤️ Surya</div>
+
+    <!-- Engagement -->
+    <div class="section engagement">
+        <div class="section-title">💍 Engagement – The Promise </div>
+        <div class="gallery">
+            <img src="engagement1.jpeg">
+            <img src="engagement1.jpg">
+            <img src="engagement2.jpg">
+        </div>
+    </div>
+
+    <!-- Family Approved Memories -->
+    <div class="section family">
+        <div class="section-title">👨‍👩‍👧 With Family Blessings </div>
+        <div class="gallery">
+            <img src="special.jpeg">
+            <img src="sareeshopping.jpeg">
+        </div>
+    </div>
+
+    <!-- Marriage -->
+    <div class="section marriage">
+        <div class="section-title">💛 The Day We Became One </div>
+        <div class="gallery">
+            <img src="marriage1.jpg">
+            <img src="marriage2.jpg">
+        </div>
+    </div>
+    <!-- After Wedding Special Memories -->
+    <div class="section after-wedding">
+        <div class="section-title">✨ Special memories </div>
+        <div class="gallery">
+            <img src="yercaud1.jpeg">
+            <img src="special1.jpeg">
+            <img src="special2.jpeg">
+            <img src="special3.jpeg">
+            <img src="special4.jpeg">
+            <img src="special5.jpeg">
+            <img src="special6.jpeg">
+            <img src="special7.jpeg">
+        </div>
+    </div>
+
+    <!-- Secret Love -->
+    <div class="section secret">
+        <div class="section-title">🤫 Our Secret Chapter </div>
+        <div class="gallery">
+            <img src="secret1.jpg">
+            <img src="secret2.jpg">
+            <img src="secret3.jpg">
+            <img src="secret4.jpg">
+            <img src="secret5.jpg">
+            <img src="secret6.jpg">
+            <img src="secret7.jpg">
+        </div>
+    </div>
+
+    <!-- Birthday -->
+    <div class="section birthday">
+        <div class="section-title">🎂 Birthday Smiles </div>
+        <div class="gallery">
+            <img src="birthday1.jpg">
+            <img src="birthday2.png">
+        </div>
+    </div>
+
+    <button class="love-button" onclick="startTyping()">Click to Read My Heart 💌</button>
+    <div class="hidden-message" id="message"></div>
+
+    <footer>Made with ❤️ by Your Wife</footer>
+
+    <script>
+        const correctPassword = "20102024";
+
+        function checkPassword() {
+            const entered = document.getElementById("password").value;
+            if (entered === correctPassword) {
+                document.getElementById("password-screen").style.display = "none";
+                document.getElementById("bg-music").play();
+            } else {
+                document.getElementById("error").innerText = "Wrong password 💔";
+            }
+        }
+
+        /* Scroll animation */
+        const sections = document.querySelectorAll('.section');
+        window.addEventListener('scroll', () => {
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    sec.classList.add('visible');
+                }
+            });
+        });
+        window.dispatchEvent(new Event('scroll'));
+
+        /* Typing effect */
+        const messageText = "From our first memory to our wedding day, every photo tells a story of love, growth, laughter, and forever. I am so grateful that life chose us for each other. I will stand beside you in every chapter still to come. ❤️";
+        let index = 0;
+        function startTyping() {
+            const el = document.getElementById("message");
+            el.style.display = "block";
+            el.innerHTML = "";
+            index = 0;
+            typeEffect();
+        }
+        function typeEffect() {
+            if (index < messageText.length) {
+                document.getElementById("message").innerHTML += messageText.charAt(index);
+                index++;
+                setTimeout(typeEffect, 40);
+            } else {
+                setTimeout(showFinalLove, 800);
+            }
+        }
+
+        function showFinalLove() {
+            document.getElementById("finalLovePopup").style.display = "flex";
+            startSparkles();
+        }
+
+        function closeFinalLove() {
+            document.getElementById("finalLovePopup").style.display = "none";
+        }
+
+
+        /* Floating hearts */
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 500);
+
+        function startSparkles() {
+            const container = document.getElementById("sparkle-container");
+            container.innerHTML = "";
+
+            for (let i = 0; i < 80; i++) {
+                const sparkle = document.createElement("div");
+                sparkle.classList.add("sparkle");
+                sparkle.style.left = Math.random() * 100 + "%";
+                sparkle.style.top = Math.random() * 100 + "%";
+                sparkle.style.animationDelay = Math.random() * 3 + "s";
+                container.appendChild(sparkle);
+            }
+        }
+
+        /* Image Click to Open */
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const lightbox = document.getElementById("imageLightbox");
+                const lightboxImg = document.getElementById("lightboxImg");
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.src;
+            });
+        });
+
+        function closeLightbox() {
+            document.getElementById("imageLightbox").style.display = "none";
+        }
+
+
+    </script>
+
+    <!-- Final Special Love Popup -->
+    <div id="finalLovePopup" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.92);
+    color:white;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+    z-index:2000;
+    overflow:hidden;">
+
+        <!-- Sparkle Background -->
+        <div id="sparkle-container" style="
+        position:absolute;
+        inset:0;
+        z-index:0;
+    "></div>
+
+        <div style="position:relative; z-index:2;">
+            <!-- your existing h1, p, button remain here -->
+            <h1 style="font-size:2.5rem;animation:pulse 1.5s infinite;">
+                You Are My Forever Valentine ❤️
+            </h1>
+
+            <p style="max-width:700px;font-size:1.2rem;line-height:1.6;margin-top:20px;">
+                No matter where life takes us,
+                no matter how many chapters we write,
+                my heart will always belong to you.
+                Thank you for being my strength, my smile,
+                and my safest place.
+                I love you endlessly. 💖
+            </p>
+
+            <button onclick="closeFinalLove()" style="
+        margin-top:30px;
+        padding:12px 30px;
+        border:none;
+        border-radius:25px;
+        background:#ff4d6d;
+        color:white;
+        cursor:pointer;">
+                Close 💌
+            </button>
+        </div>
+    </div>
+
+    <!-- Image Lightbox -->
+    <div id="imageLightbox" onclick="closeLightbox()">
+        <span onclick="closeLightbox()">✖</span>
+        <img id="lightboxImg">
+    </div>
+
+
+</body>
+</html>
